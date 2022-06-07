@@ -8,7 +8,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Knuckles\Camel\Extraction\ExtractedEndpointData;
 use Knuckles\Camel\Output\OutputEndpointData;
-use League\Flysystem\Adapter\Local;
+use League\Flysystem\Adapter\LocalFileSystemAdapter;
 use League\Flysystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
 
@@ -62,7 +62,7 @@ class Camel
 
     public static function loadEndpointsFromCamelFiles(string $folder, callable $callback, bool $storeGroupFilePaths = true)
     {
-        $adapter = new Local(getcwd());
+        $adapter = new LocalFileSystemAdapter(getcwd());
         $fs = new Filesystem($adapter);
         $contents = $fs->listContents($folder);;
 
