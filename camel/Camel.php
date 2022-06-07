@@ -4,13 +4,13 @@
 namespace Knuckles\Camel;
 
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
-use Knuckles\Camel\Extraction\ExtractedEndpointData;
-use Knuckles\Camel\Output\OutputEndpointData;
-use League\Flysystem\Adapter\Local\LocalFileSystemAdapter;
 use League\Flysystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;
+use Illuminate\Support\Collection;
+use Knuckles\Camel\Output\OutputEndpointData;
+use League\Flysystem\Local\LocalFilesystemAdapter;
+use Knuckles\Camel\Extraction\ExtractedEndpointData;
 
 
 class Camel
@@ -84,7 +84,7 @@ class Camel
 
     public static function loadUserDefinedEndpoints(string $folder): array
     {
-        $adapter = new Local(getcwd());
+        $adapter = new LocalFilesystemAdapter(getcwd());
         $fs = new Filesystem($adapter);
         $contents = $fs->listContents($folder);;
 
